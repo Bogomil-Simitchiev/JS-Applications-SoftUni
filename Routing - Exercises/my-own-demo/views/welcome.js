@@ -11,9 +11,10 @@ const welcomeTemplate = () => html`
 	<footer>
 		<p>Copyright &#169; 2023</p>
 	</footer>
+	
 `
 const root = document.getElementById('root');
 
 export function welcomeView() {
-    render(welcomeTemplate(), root);
+	render(welcomeTemplate(), root);
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,17 +9,21 @@
     <script src="app.js" type="module"></script>
     <title>Best cars</title>
 </head>
+
 <body>
     <ul class="topnav">
         <li><a href="/catalog">Catalog</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="/contact">Contact us</a></li>
-        <li class="right"><a href="/register">Register</a></li>
-        <li class="right" style="display: none;"><a href="/login">Login</a></li>
-        <li class="right"><a href="/create">Create</a></li>
-        <li class="right" style="display: none;"><a href="/logout">Logout</a></li>
-      </ul>
+        <li class="right guest"><a href="/register">Register</a></li>
+        <li class="right guest"><a href="/login">Login</a></li>
+        <li class="right user"><a href="/logout">Logout</a></li>
+        <li class="right user"><a href="/create">Create</a></li>
+        <li class="right user"><a href="" id="helloMessage"></a></li>
 
-      <div id="root"></div>
+    </ul>
+
+    <div id="root"></div>
 </body>
+
 </html>

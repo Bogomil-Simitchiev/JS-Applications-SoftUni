@@ -98,3 +98,28 @@ label{
 textarea{
   font-size: 24px;
 }
+.previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+.deleteBtn{
+  background-color: red;
+  border-radius: 5px;
+  width: 70px;
+  height: 50px;
+  font-size: 15px;
+  color: white;
+
+}
+.editBtn{
+  background-color: green;
+  border-radius: 5px;
+  width: 70px;
+  height: 50px;
+  font-size: 15px;
+  color: white;
+}
+img{
+  width: 450px;
+  height: 300px;
+}

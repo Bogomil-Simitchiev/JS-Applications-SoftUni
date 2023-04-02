@@ -5,24 +5,27 @@ function handlerSubmit(e) {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
+    const user = JSON.parse(localStorage.getItem('user'));
+
     let brand = formData.get('brand');
     let year = formData.get('year');
     let info = formData.get('info');
     let img = formData.get('img');
 
     if (brand != '' && year != '' && info != '' && img != '') {
-        let obj = {
+        let car = {
             brand,
             year,
             info,
-            img
+            img,
+            userId:user._id
         }
         fetch('http://localhost:3030/jsonstore/cars/', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(obj)
+            body: JSON.stringify(car)
         })
             .then(res => res.json())
             .then(result => {
@@ -33,7 +36,10 @@ function handlerSubmit(e) {
                 document.querySelector('#img').value = '';
                 page.redirect(`/cars/${result._id}`);
 
-            }).catch(err => console.log(err))
+            })
+            .catch(() =>{
+                console.log('Cannot create car article!')
+            })
     }
 
 
