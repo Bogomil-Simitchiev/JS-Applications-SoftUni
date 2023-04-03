@@ -9,6 +9,5 @@ export function navigate() {
     } else {
         document.querySelectorAll('.user').forEach(e => e.style.display = 'none');
         document.querySelectorAll('.guest').forEach(e => e.style.display = 'block');
-
     }
 }

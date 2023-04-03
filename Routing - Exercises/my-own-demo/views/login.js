@@ -1,6 +1,5 @@
 import { html, render } from '../node_modules/lit-html/lit-html.js'
-import { navigate } from './utils.js';
-import page from '../node_modules/page/page.mjs'
+import { postLogIn } from '../requests/requests.js';
 
 function loginHandler(e) {
     e.preventDefault();
@@ -13,32 +12,7 @@ function loginHandler(e) {
             email,
             password
         }
-        fetch('http://localhost:3030/users/login/', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-            .then(res => res.json())
-            .then(user => {
-                if (user.code == 403) {
-                    alert('Cannot log in this user!');
-                    document.querySelector('#email').value = '';
-                    document.querySelector('#password').value = '';
-                }
-                else {
-                    alert('Successfully logged in!');
-                    localStorage.setItem('user', JSON.stringify(user));
-                    navigate();
-                    page.redirect('/');
-                }
-
-            })
-            .catch(() => {
-                alert('Cannot log in this user!')
-            })
-
+        postLogIn(user);
     }
 }
 

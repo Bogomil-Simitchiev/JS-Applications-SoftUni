@@ -1,36 +1,23 @@
 import { html, render } from '../node_modules/lit-html/lit-html.js'
-import { navigate } from "./utils.js";
-import page from '../node_modules/page/page.mjs'
-
+import { postRegistration } from '../requests/requests.js';
 function registerHandler(e) {
   e.preventDefault();
   const formData = new FormData(e.currentTarget);
   let email = formData.get('email');
   let password = formData.get('password');
-
-  if (email !== '' && password !== '') {
-    let user = {
-      email,
-      password
+  let confirmPassword = formData.get('confirmPassword');
+  
+  if (email !== '' && password !== '' && confirmPassword !== '') {
+    if (password == confirmPassword) {
+      let user = {
+        email,
+        password
+      }
+      postRegistration(user);
+    } else {
+      alert('Passwords are not matching');
+      document.getElementById('confirmPassword').value = '';
     }
-    fetch('http://localhost:3030/users/register/', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(user)
-    })
-      .then(res => res.json())
-      .then(user => {
-        alert('Successfully registration!')
-        localStorage.setItem('user', JSON.stringify(user));
-        navigate();
-        page.redirect('/');
-      })
-      .catch(() => {
-        alert('Cannot register this user!');
-      })
-
   }
 }
 
@@ -42,6 +29,8 @@ const registerTemplate = () => html`
 
   <label for="password">Password:</label><br>
   <input type="password" id="password" name="password"><br>
+  <label for="confirmPassword">Confirm password:</label><br>
+  <input type="password" id="confirmPassword" name="confirmPassword"><br>
 
   <input type="submit" value="Submit">
 </form>

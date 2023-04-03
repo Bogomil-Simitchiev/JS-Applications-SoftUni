@@ -10,15 +10,17 @@ import { carView } from './views/carDetails.js';
 import { navigate } from './views/utils.js';
 import { loginView } from './views/login.js';
 import { logout } from './views/logout.js';
+import { editView } from './views/editCarDetails.js';
 
 page('/', welcomeView);
-page('/catalog', catalogView);
 page('/about', aboutView);
 page('/contact', contactView);
 page('/register', registerView);
 page('/login', loginView);
 page('/create', createView);
+page('/edit', editView);
 page('/cars/:id', carView);
+page('/catalog', catalogView);
 page('/logout', logout);
 
 page.start();

@@ -1,5 +1,5 @@
 import { html, render } from '../node_modules/lit-html/lit-html.js'
-import page from '../node_modules/page/page.mjs';
+import { createCar } from '../requests/requests.js';
 
 function handlerSubmit(e) {
     e.preventDefault();
@@ -20,28 +20,8 @@ function handlerSubmit(e) {
             img,
             userId:user._id
         }
-        fetch('http://localhost:3030/jsonstore/cars/', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(car)
-        })
-            .then(res => res.json())
-            .then(result => {
-                alert('Successfully created!')
-                document.querySelector('#brand').value = '';
-                document.querySelector('#year').value = '';
-                document.querySelector('#info').value = '';
-                document.querySelector('#img').value = '';
-                page.redirect(`/cars/${result._id}`);
-
-            })
-            .catch(() =>{
-                console.log('Cannot create car article!')
-            })
+        createCar(car);
     }
-
 
 }
 const createTemplate = () => html`
