@@ -7,8 +7,13 @@ export async function getAll() {
     let response = await result.json();
     return response;
 }
+export async function getSingleFurniture(id) {
+    let result = await fetch(urlCatalog + id);
+    let response = await result.json();
+    return response;
+}
 export async function getAllMyFurnitures(userId) {
-    let result = await fetch(urlCatalog +`?where=_ownerId%3D%22${userId}%22`);
+    let result = await fetch(urlCatalog + `?where=_ownerId%3D%22${userId}%22`);
     let response = await result.json();
     return response;
 }

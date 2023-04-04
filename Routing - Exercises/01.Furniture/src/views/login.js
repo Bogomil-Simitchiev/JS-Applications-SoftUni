@@ -39,9 +39,6 @@ function loginUser(e){
         }
         postLogIn(user);
     }
-
-
-
 }
 export function loginView() {
     render(loginTemplate(), root);
