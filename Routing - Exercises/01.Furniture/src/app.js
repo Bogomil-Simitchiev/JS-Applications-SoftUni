@@ -12,11 +12,18 @@ import { registerView } from './views/register.js';
 page('/', homeView);
 page('/create', createView);
 page('/my-furniture', myFurnitureView);
-page('/details', detailsView);
-page('/edit', editView);
+page('/details/:id', detailsView);
+page('/edit/:id', editView);
 page('/login', loginView);
 page('/register', registerView);
-page('/logout', () => console.log('logout'));
+page('/logout', logout);
+
+export function logout() {
+    alert('Successfully logout!');
+    localStorage.removeItem('user');
+    navigate();
+    page.redirect('/');
+}
 
 navigate();
 

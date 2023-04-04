@@ -1,15 +1,16 @@
 import { html, render } from '../../node_modules/lit-html/lit-html.js';
-
+import { postLogIn } from '../requests/requests.js';
 const root = document.querySelector('.container');
 
-const loginTemplate = () => html`
+const loginTemplate = () =>
+html`
 <div class="row space-top">
             <div class="col-md-12">
                 <h1>Login User</h1>
                 <p>Please fill all fields.</p>
             </div>
         </div>
-        <form>
+        <form @submit=${loginUser}>
             <div class="row space-top">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -25,6 +26,23 @@ const loginTemplate = () => html`
             </div>
         </form>
 `
+function loginUser(e){
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    let email = formData.get('email');
+    let password = formData.get('password');
+
+    if (email != '' && password != '') {
+        let user = {
+            email,
+            password
+        }
+        postLogIn(user);
+    }
+
+
+
+}
 export function loginView() {
     render(loginTemplate(), root);
 }

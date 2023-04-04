@@ -1,60 +1,46 @@
 import { html, render } from '../../node_modules/lit-html/lit-html.js';
+import { getAll } from '../requests/requests.js';
 
 const root = document.querySelector('.container');
 
-const homeTemplate = () => html`
+const homeTemplate = () =>
+html`
 <div class="row space-top">
 <div class="col-md-12">
     <h1>Welcome to Furniture System</h1>
     <p>Select furniture from the catalog to view details.</p>
 </div>
 </div>
-<div class="row space-top">
+`
+
+const templateItems = (items) =>
+html`
+    <div class="row space-top">
+
+${items.map(item => html`   
 <div class="col-md-4">
-    <div class="card text-white bg-primary">
-        <div class="card-body">
-                <img src="./images/table.png" />
-                <p>Description here</p>
-                <footer>
-                    <p>Price: <span>235 $</span></p>
-                </footer>
-                <div>
-                    <a href="/details" class="btn btn-info">Details</a>
-                </div>
-        </div>
+<div class="card text-white bg-primary">
+    <div class="card-body">
+            <img src="${item.img}" />
+            <p>${item.description}</p>
+            <footer>
+                <p>Price: <span>${item.price} $</span></p>
+            </footer>
+            <div>
+                <a href="${`/details/${item._id}`}" class="btn btn-info">Details</a>
+            </div>
     </div>
 </div>
-<div class="col-md-4">
-    <div class="card text-white bg-primary">
-        <div class="card-body">
-                <img src="./images/sofa.jpg" />
-                <p>Description here</p>
-                <footer>
-                    <p>Price: <span>1200 $</span></p>
-                </footer>
-                <div>
-                    <a href="/details" class="btn btn-info">Details</a>
-                </div>
-        </div>
-    </div>
 </div>
-<div class="col-md-4">
-    <div class="card text-white bg-primary">
-        <div class="card-body">
-                <img src="./images/chair.jpg" />
-                <p>Description here</p>
-                <footer>
-                    <p>Price: <span>55 $</span></p>
-                </footer>
-                <div>
-                    <a href="/details" class="btn btn-info">Details</a>
-                </div>
-        </div>
-    </div>
-</div>
+`)}
 </div>
 `
-export function homeView(){
-    
-    render(homeTemplate(), root);
+
+export async function homeView() {
+    let informations = await getAll();
+    let templates = [];
+    templates.push(homeTemplate());
+    templates.push(templateItems(informations));
+
+    render(templates, root);
 }
