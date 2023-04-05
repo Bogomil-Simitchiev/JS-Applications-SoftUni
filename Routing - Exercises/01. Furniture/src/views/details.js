@@ -27,7 +27,7 @@ html`
             <p>Material: <span>${info.material}</span></p>
             <div>
                 <a href="/edit/${info._id}" class="btn btn-info">Edit</a>
-                <a href="/" class="btn btn-red">Delete</a>
+                <a href="/delete/${info._id}" class="btn btn-red">Delete</a>
             </div>
         </div>
         </div>

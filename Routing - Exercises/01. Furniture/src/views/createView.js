@@ -4,7 +4,7 @@ const root = document.querySelector('.container');
 
 function createHandler(e){
     e.preventDefault();
-    
+    console.log('ready to create!');
 }
 
 const createTemplate = () => html`
@@ -19,7 +19,7 @@ const createTemplate = () => html`
     <div class="col-md-4">
         <div class="form-group">
             <label class="form-control-label" for="new-make">Make</label>
-            <input class="form-control valid" id="new-make" type="text" name="make">
+            <input class="form-control" id="new-make" type="text" name="make">
         </div>
         <div class="form-group has-success">
             <label class="form-control-label" for="new-model">Model</label>
@@ -27,7 +27,7 @@ const createTemplate = () => html`
         </div>
         <div class="form-group has-danger">
             <label class="form-control-label" for="new-year">Year</label>
-            <input class="form-control is-invalid" id="new-year" type="number" name="year">
+            <input class="form-control" id="new-year" type="number" name="year">
         </div>
         <div class="form-group">
             <label class="form-control-label" for="new-description">Description</label>

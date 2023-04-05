@@ -45,3 +45,17 @@ export function postLogIn(user) {
         })
 
 }
+export function delFurniture(id, user) {
+    fetch(urlCatalog + id, {
+        method: 'DELETE',
+        headers: {
+            'X-Authorization': user.accessToken
+        }
+    })
+        .then(res => res.json())
+        .then(() => {
+            alert('Successfully deleted!');
+            page.redirect('/catalog');
+        })
+        .catch(err => console.log(err))
+}
