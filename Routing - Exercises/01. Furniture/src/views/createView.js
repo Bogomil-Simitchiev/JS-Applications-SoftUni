@@ -1,13 +1,54 @@
 import { html, render } from '../../node_modules/lit-html/lit-html.js';
+import { createFurniture } from '../requests/requests.js';
 
 const root = document.querySelector('.container');
 
-function createHandler(e){
+function createHandler(e) {
     e.preventDefault();
-    console.log('ready to create!');
+    const formData = new FormData(e.currentTarget);
+
+    const make = formData.get('make');
+    const year = formData.get('year');
+    const model = formData.get('model');
+    const description = formData.get('description');
+    const price = formData.get('price');
+    const img = formData.get('img');
+    const material = formData.get('material');
+
+    if (make != '' && model != '' && year != '' && description != '' && price != '' && img != '' && material != '') {
+        console.log('Make: ' + make);
+        console.log('Year: ' + year);
+        console.log('Model: ' + model);
+        console.log('Description: ' + description);
+        console.log('Price: ' + price);
+        console.log('Img: ' + img);
+        console.log('Material: ' + material);
+
+        // TODO: make validation for the css classes
+        
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        const furniture = {
+            _ownerId: user._id,
+            make,
+            model,
+            year,
+            description,
+            price,
+            img,
+            material,
+
+        }
+        createFurniture(furniture, user);
+
+    }
+
+
+
 }
 
-const createTemplate = () => html`
+const createTemplate = () =>
+    html`
 <div class="row space-top">
 <div class="col-md-12">
     <h1>Create New Furniture</h1>
@@ -23,7 +64,7 @@ const createTemplate = () => html`
         </div>
         <div class="form-group has-success">
             <label class="form-control-label" for="new-model">Model</label>
-            <input class="form-control is-valid" id="new-model" type="text" name="model">
+            <input class="form-control" id="new-model" type="text" name="model">
         </div>
         <div class="form-group has-danger">
             <label class="form-control-label" for="new-year">Year</label>
@@ -52,6 +93,6 @@ const createTemplate = () => html`
 </div>
 </form>
 `
-export function createView(){
+export function createView() {
     render(createTemplate(), root);
 }

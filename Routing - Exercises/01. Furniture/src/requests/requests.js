@@ -48,14 +48,53 @@ export function postLogIn(user) {
 export function delFurniture(id, user) {
     fetch(urlCatalog + id, {
         method: 'DELETE',
-        headers: {
+        headers:{
+            'content-type': 'application/json',
             'X-Authorization': user.accessToken
         }
     })
         .then(res => res.json())
         .then(() => {
             alert('Successfully deleted!');
-            page.redirect('/catalog');
+            page.redirect('/');
         })
         .catch(err => console.log(err))
+}
+export function postRegister(user){
+    fetch('http://localhost:3030/users/register/', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify(user)
+    })
+        .then(res => res.json())
+        .then(user => {
+            alert('Successfully registration!')
+            localStorage.setItem('user', JSON.stringify(user));
+            navigate();
+            page.redirect('/');
+        })
+        .catch(() => {
+            alert('Cannot register this user!');
+        })
+}
+export function createFurniture(furniture,user) {
+    fetch(urlCatalog, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': user.accessToken
+        },
+        body: JSON.stringify(furniture)
+    })
+        .then(res => res.json())
+        .then(() => {
+            alert('Successfully created!')
+            page.redirect(`/`);
+
+        })
+        .catch(() => {
+            console.log('Cannot create furniture!')
+        })
 }

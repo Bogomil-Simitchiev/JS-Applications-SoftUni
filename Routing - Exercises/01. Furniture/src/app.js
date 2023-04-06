@@ -25,7 +25,6 @@ function deleteFurniture(ctx) {
         const user = JSON.parse(localStorage.getItem('user'));
         delFurniture(ctx.params.id, user);   
     }
-    page.redirect('/');
 }
 
 function logout() {
