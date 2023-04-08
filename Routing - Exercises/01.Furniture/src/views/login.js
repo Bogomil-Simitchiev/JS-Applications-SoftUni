@@ -1,6 +1,14 @@
 import { html, render } from '../../node_modules/lit-html/lit-html.js';
 import { postLogIn } from '../requests/requests.js';
+import { activeAtags } from '../utils.js';
 const root = document.querySelector('.container');
+
+const catalogLink = document.getElementById('catalogLink');
+const createLink = document.getElementById('createLink');
+const profileLink = document.getElementById('profileLink');
+const logoutBtn = document.getElementById('logoutBtn');
+const loginLink = document.getElementById('loginLink');
+const registerLink = document.getElementById('registerLink');
 
 const loginTemplate = () =>
 html`
@@ -41,5 +49,6 @@ function loginUser(e){
     }
 }
 export function loginView() {
+    activeAtags(loginLink, [createLink, profileLink, logoutBtn, catalogLink, registerLink]);
     render(loginTemplate(), root);
 }

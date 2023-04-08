@@ -1,7 +1,14 @@
 import { html, render } from '../../node_modules/lit-html/lit-html.js';
 import { postRegister } from '../requests/requests.js';
-
+import { activeAtags } from '../utils.js';
 const root = document.querySelector('.container');
+
+const catalogLink = document.getElementById('catalogLink');
+const createLink = document.getElementById('createLink');
+const profileLink = document.getElementById('profileLink');
+const logoutBtn = document.getElementById('logoutBtn');
+const loginLink = document.getElementById('loginLink');
+const registerLink = document.getElementById('registerLink');
 
 const registerTemplate = () =>
 html`
@@ -53,5 +60,6 @@ function registerUser(e) {
     }
 }
 export function registerView() {
+    activeAtags(registerLink, [createLink, profileLink, logoutBtn, catalogLink, loginLink]);
     render(registerTemplate(), root);
 }

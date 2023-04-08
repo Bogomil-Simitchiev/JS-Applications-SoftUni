@@ -9,3 +9,7 @@ export function navigate() {
         document.getElementById('guest').style.display = 'inline-block';
     }
 }
+export function activeAtags(aTag, arraOfOthertags) {
+    aTag.classList.add('active');
+    arraOfOthertags.forEach(tag => tag.classList.remove('active'));
+}
