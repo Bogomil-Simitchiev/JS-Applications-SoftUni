@@ -1,2 +1,2 @@
 # JS-Applications-SoftUni
-All exercises for this course
+All exercises and applications for this course
