@@ -28,22 +28,23 @@ function loginHandler(e) {
 }
 
 const loginTemplate = () =>
-html`
-    <br>
-    <h2 align="center">Log In</h2>
-    <br>
-    <form align="center" @submit=${loginHandler}>
-  <label for="email">Email:</label><br>
-  <input type="email" id="email" name="email" required>
-  <br>
-  <br>
-  <label for="password">Password:</label><br>
-  <input type="password" id="password" name="password" required>
-  <br>
-  <br>
-  <input type="submit" value="Submit">
-</form>
-    
+html`  
+    <form class="modal-content animate" @submit=${loginHandler}>
+     <h2 align="center">Log in</h2>
+    <div class="container">
+      <label for="email"><b>Email:</b></label>
+      <input type="email" placeholder="Enter email" name="email" required>
+      <br>
+      <br>
+      <label for="password"><b>Password:</b></label>
+      <input type="password" placeholder="Enter password" name="password" required>
+      <br>
+      <br>
+      <input type="submit" value="Login">
+    </div>
+    <div class="container" style="background-color:#f1f1f1">  
+    </div>
+  </form>  
 `
 
 export function loginView(ctx) {

@@ -30,25 +30,26 @@ function registerHandler(e) {
 
 const registerTemplate = () =>
 html`
-    <br>
-    <h2 align="center">Registration</h2>
-    <br>
-    <form align="center" @submit=${registerHandler}>
-    <label for="username">Username:</label>
-    <br>
-  <input type="text" id="username" name="username" required>
-  <br>
-  <label for="email">Email:</label>
-  <br>
-  <input type="email" id="email" name="email" required>
-  <br>
-  <label for="password">Password:</label><br>
-  <input type="password" id="password" name="password" required>
-  <br>
-  <br>
-  <input type="submit" value="Submit">
-</form>
-    
+    <form class="modal-content animate" @submit=${registerHandler}>
+     <h2 align="center">Registration</h2>
+    <div class="container">
+      <label for="username"><b>Username:</b></label>
+      <input type="text" placeholder="Enter username" name="username" required>
+      <br>
+      <br>
+      <label for="email"><b>Email:</b></label>
+      <input type="email" placeholder="Enter email" name="email" required>
+      <br>
+      <br>
+      <label for="password"><b>Password:</b></label>
+      <input type="password" placeholder="Enter password" name="password" required>
+      <br>
+      <br>
+      <input type="submit" value="Register">
+    </div>
+    <div class="container" style="background-color:#f1f1f1">
+    </div>
+  </form>  
 `
 
 export function registerView(ctx) {
