@@ -13,7 +13,7 @@ const contact = document.getElementById('contact');
 const recipeTemplate = (recipe) =>
     html`
 <div class="card" style="width: 18rem;">
-  <img src="${recipe.img}" class="card-img-top" alt="...">
+  <img src="${recipe.img}" class="card-img-top" alt="..." height=200px>
   <div class="card-body">
     <h5 class="card-title">${recipe.name}</h5>
     <a href="/details/${recipe._id}" class="btn btn-primary">Details</a>

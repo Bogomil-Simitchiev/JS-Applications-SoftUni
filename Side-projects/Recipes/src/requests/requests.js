@@ -1,6 +1,6 @@
 import page from '../../node_modules/page/page.mjs';
 import { navigateNavbar } from "../utils.js";
-
+const recipeDetailsURL = `http://localhost:3030/jsonstore/cookbook/details`;
 const recipeURL = `http://localhost:3030/jsonstore/cookbook/recipes`
 
 export const getAllRecipes = () => fetch(recipeURL).then(res => res.json()).catch(err => console.log(err));
@@ -23,9 +23,6 @@ export const loginUser = (user) => {
             else {
                 alert('Successfully logged in!');
                 localStorage.setItem('user', JSON.stringify(user));
-
-                console.log(localStorage.getItem('user'));
-
                 navigateNavbar();
                 page.redirect('/');
             }
@@ -35,7 +32,7 @@ export const loginUser = (user) => {
             alert('Cannot log in this user!')
         })
 }
-export function registerUser(user){
+export function registerUser(user) {
     fetch('http://localhost:3030/users/register/', {
         method: 'POST',
         headers: {
@@ -61,5 +58,39 @@ export function registerUser(user){
         })
         .catch(() => {
             alert('Cannot register this user!')
+        })
+}
+export function postRecipe(items, user) {
+    fetch(recipeURL, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': user.accessToken
+        },
+        body: JSON.stringify(items)
+    })
+        .then(res => res.json())
+        .then(() => {
+            alert('Successfully created!');
+            page.redirect('/');
+        })
+        .catch(() => {
+            alert('Cannot create a recipe')
+        })
+}
+export function postRecipeDetails(items, user) {
+    fetch(recipeDetailsURL, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': user.accessToken
+        },
+        body: JSON.stringify(items)
+    })
+        .then(res => res.json())
+        .then(() => {
+        })
+        .catch((err) => {
+            console.log(err);
         })
 }
