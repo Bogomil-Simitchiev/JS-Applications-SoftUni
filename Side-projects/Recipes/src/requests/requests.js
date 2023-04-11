@@ -35,3 +35,31 @@ export const loginUser = (user) => {
             alert('Cannot log in this user!')
         })
 }
+export function registerUser(user){
+    fetch('http://localhost:3030/users/register/', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+        .then(res => res.json())
+        .then(user => {
+            if (user.code == 403) {
+                alert('Cannot register this user!');
+                document.querySelector('#email').value = '';
+                document.querySelector('#password').value = '';
+                document.querySelector('#username').value = '';
+            }
+            else {
+                alert('Successfully registered!');
+                localStorage.setItem('user', JSON.stringify(user));
+                navigateNavbar();
+                page.redirect('/');
+            }
+
+        })
+        .catch(() => {
+            alert('Cannot register this user!')
+        })
+}
