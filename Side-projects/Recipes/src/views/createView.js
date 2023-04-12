@@ -1,5 +1,5 @@
 import { html } from '../../node_modules/lit-html/lit-html.js'
-import { postRecipe, postRecipeDetails } from '../requests/requests.js';
+import { postRecipe } from '../requests/requests.js';
 import { activeAtags } from '../utils.js';
 
 const home = document.getElementById('home');
@@ -11,31 +11,26 @@ const create = document.getElementById('create');
 const contact = document.getElementById('contact');
 
 function createHandler(e) {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get('name');
-    const img = formData.get('img');
-    const steps = formData.get('steps');
-    const ingredients = formData.get('ingredients');
+  e.preventDefault();
+  const formData = new FormData(e.currentTarget);
+  const name = formData.get('name');
+  const img = formData.get('img');
+  const steps = formData.get('steps');
+  const ingredients = formData.get('ingredients');
 
-    const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user'));
 
-    const detailsRecipe = {
-        name,
-        img,
-        'steps': Array.from(steps.split('\n')).filter(x => x !== ''),
-        'ingredients': Array.from(ingredients.split('\n')).filter(x => x !== '')
-    }
-    const items = {
-        name,
-        img
-    }
-    postRecipeDetails(detailsRecipe, user);
-    postRecipe(items, user);
+  const detailsRecipe = {
+    name,
+    img,
+    'steps': Array.from(steps.split('\n')).filter(x => x !== ''),
+    'ingredients': Array.from(ingredients.split('\n')).filter(x => x !== '')
+  }
+  postRecipe(detailsRecipe, user);
 }
 
 const createTemplate = () =>
-    html`
+  html`
    <form class="modal-content animate" @submit=${createHandler}>
      <h2 align="center">Create a recipe</h2>
     <div class="container">
@@ -59,6 +54,6 @@ const createTemplate = () =>
 `
 
 export function createView(ctx) {
-    activeAtags(create, [home, about, recipes, login, register, contact]);
-    ctx.render(createTemplate());
+  activeAtags(create, [home, about, recipes, login, register, contact]);
+  ctx.render(createTemplate());
 }

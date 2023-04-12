@@ -9,6 +9,7 @@ import { homeView } from './views/homeView.js';
 import { loginView } from './views/loginView.js';
 import { recipesView } from './views/recipesView.js';
 import { registerView } from './views/registerView.js';
+import { detailsView } from './views/details.js';
 
 page(renderMiddleware);
 
@@ -17,6 +18,7 @@ page('/recipes', recipesView);
 page('/about', aboutView);
 page('/login', loginView);
 page('/register', registerView);
+page('/details/:id', detailsView)
 page('/create', createView);
 page('/contact', contactView);
 page('/logout', () => {

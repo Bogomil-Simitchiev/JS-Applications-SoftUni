@@ -23,8 +23,6 @@ function loginHandler(e) {
         }
         loginUser(user);
     }
-
-
 }
 
 const loginTemplate = () =>
@@ -33,11 +31,11 @@ html`
      <h2 align="center">Log in</h2>
     <div class="container">
       <label for="email"><b>Email:</b></label>
-      <input type="email" placeholder="Enter email" name="email" required>
+      <input type="email" placeholder="Enter email" name="email" id="email" required>
       <br>
       <br>
       <label for="password"><b>Password:</b></label>
-      <input type="password" placeholder="Enter password" name="password" required>
+      <input type="password" placeholder="Enter password" name="password" id="password" required>
       <br>
       <br>
       <input type="submit" value="Login">

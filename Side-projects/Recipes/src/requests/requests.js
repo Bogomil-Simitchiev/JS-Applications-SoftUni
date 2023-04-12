@@ -1,9 +1,11 @@
 import page from '../../node_modules/page/page.mjs';
 import { navigateNavbar } from "../utils.js";
-const recipeDetailsURL = `http://localhost:3030/jsonstore/cookbook/details`;
-const recipeURL = `http://localhost:3030/jsonstore/cookbook/recipes`
 
-export const getAllRecipes = () => fetch(recipeURL).then(res => res.json()).catch(err => console.log(err));
+const recipeDetailsURL = `http://localhost:3030/jsonstore/cookbook/details/`;
+
+export const getAllRecipes = () => fetch(recipeDetailsURL).then(res => res.json()).catch(err => console.log(err));
+
+export const getRecipe = (id) => fetch(recipeDetailsURL + id).then(res => res.json()).catch(err => console.log(err));
 
 export const loginUser = (user) => {
     fetch('http://localhost:3030/users/login/', {
@@ -29,7 +31,9 @@ export const loginUser = (user) => {
 
         })
         .catch(() => {
-            alert('Cannot log in this user!')
+            alert('Cannot log in this user!');
+            document.querySelector('#email').value = '';
+            document.querySelector('#password').value = '';
         })
 }
 export function registerUser(user) {
@@ -61,8 +65,8 @@ export function registerUser(user) {
         })
 }
 export function postRecipe(items, user) {
-    fetch(recipeURL, {
-        method: 'POST',
+    fetch(recipeDetailsURL, {
+        method: 'post',
         headers: {
             'content-type': 'application/json',
             'X-Authorization': user.accessToken
@@ -76,21 +80,5 @@ export function postRecipe(items, user) {
         })
         .catch(() => {
             alert('Cannot create a recipe')
-        })
-}
-export function postRecipeDetails(items, user) {
-    fetch(recipeDetailsURL, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-            'X-Authorization': user.accessToken
-        },
-        body: JSON.stringify(items)
-    })
-        .then(res => res.json())
-        .then(() => {
-        })
-        .catch((err) => {
-            console.log(err);
         })
 }
