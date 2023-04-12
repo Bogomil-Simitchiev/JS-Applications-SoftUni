@@ -21,10 +21,12 @@ nav {
     padding-right: 10px;
 }
 
+h3 {
+    margin: 24px;
+}
 h2 {
     margin: 24px;
 }
-
 .card {
     border: 2px solid black;
     margin-bottom: 50px;
@@ -92,6 +94,7 @@ textarea {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+
 .container {
     padding: 15px;
 }
@@ -138,10 +141,6 @@ textarea {
         display: block;
         float: none;
     }
-
-    .cancelbtn {
-        width: 100%;
-    }
 }
 
 #usernameShow {
@@ -160,4 +159,21 @@ input[type=submit] {
 
 input[type=submit]:hover {
     opacity: 0.8;
+}
+
+#container {
+    margin: auto;
+    width: 60%;
+    border: 3px solid green;
+    padding: 10px;
+}
+.recipe-image{
+    width: 250px;
+}
+.previous{
+    background-color: #04AA6D;
+    color:white;
+    text-decoration: none;
+    border-radius: 25px;
+    padding: 10px;
 }

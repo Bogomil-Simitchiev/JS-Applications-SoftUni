@@ -12,6 +12,7 @@ const contact = document.getElementById('contact');
 
 function createHandler(e) {
   e.preventDefault();
+
   const formData = new FormData(e.currentTarget);
   const name = formData.get('name');
   const img = formData.get('img');
@@ -30,7 +31,7 @@ function createHandler(e) {
 }
 
 const createTemplate = () =>
-  html`
+html`
    <form class="modal-content animate" @submit=${createHandler}>
      <h2 align="center">Create a recipe</h2>
     <div class="container">

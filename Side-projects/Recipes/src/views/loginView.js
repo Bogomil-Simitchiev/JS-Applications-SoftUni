@@ -12,8 +12,8 @@ const contact = document.getElementById('contact');
 
 function loginHandler(e) {
     e.preventDefault();
+    
     const formData = new FormData(e.currentTarget);
-
     const email = formData.get('email');
     const password = formData.get('password');
     if (email !== '' && password !== '') {

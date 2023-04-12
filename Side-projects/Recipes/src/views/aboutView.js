@@ -10,7 +10,7 @@ const create = document.getElementById('create');
 const contact = document.getElementById('contact');
 
 const aboutTemplate = () =>
-    html`
+html`
     <h2 align="center">About us</h2>
     <main id="aboutMain">
       <h3 style="font-style:italic;">Welcome to Recipe Website</h3>
@@ -21,8 +21,7 @@ const aboutTemplate = () =>
     </main>
     <footer>
       <p>&copy; 2023 Recipe Website</p>
-    </footer>
-    
+    </footer>    
 `
 
 export function aboutView(ctx) {

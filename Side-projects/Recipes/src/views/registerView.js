@@ -12,8 +12,8 @@ const contact = document.getElementById('contact');
 
 function registerHandler(e) {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
 
+    const formData = new FormData(e.currentTarget);
     const username = formData.get('username');
     const email = formData.get('email');
     const password = formData.get('password');
