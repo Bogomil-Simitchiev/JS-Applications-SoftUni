@@ -24,7 +24,8 @@ function handlerSubmit(e) {
     }
 
 }
-const createTemplate = () => html`
+const createTemplate = () => 
+html`
 <form @submit=${handlerSubmit}>
   <label for="brand">Brand:</label><br>
   <input type="text" id="brand" name="brand"><br>

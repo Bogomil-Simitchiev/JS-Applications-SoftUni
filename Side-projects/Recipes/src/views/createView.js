@@ -25,13 +25,14 @@ function createHandler(e) {
     name,
     img,
     'steps': Array.from(steps.split('\n')).filter(x => x !== ''),
-    'ingredients': Array.from(ingredients.split('\n')).filter(x => x !== '')
+    'ingredients': Array.from(ingredients.split('\n')).filter(x => x !== ''),
+    '_ownerId': user._id
   }
   postRecipe(detailsRecipe, user);
 }
 
 const createTemplate = () =>
-html`
+  html`
    <form class="modal-content animate" @submit=${createHandler}>
      <h2 align="center">Create a recipe</h2>
     <div class="container">

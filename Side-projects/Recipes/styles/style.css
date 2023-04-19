@@ -177,3 +177,11 @@ input[type=submit]:hover {
     border-radius: 25px;
     padding: 10px;
 }
+.deleteTag{
+    background-color: red;
+    color:white;
+    text-decoration: none;
+    border-radius: 25px;
+    border-color: white;
+    padding: 10px;
+}
