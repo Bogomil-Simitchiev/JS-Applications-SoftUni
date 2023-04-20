@@ -1,5 +1,5 @@
 import { html } from '../../node_modules/lit-html/lit-html.js'
-import { getRecipe } from '../requests/requests.js';
+import { delRecipe, getRecipe } from '../requests/requests.js';
 
 const detailsForNotUserTemplate = (recipe) =>
 	html`
@@ -26,8 +26,10 @@ const detailsForNotUserTemplate = (recipe) =>
 
 function deleteRecipe(e) {
 	const id = e.currentTarget.parentNode.id;
-	console.log(id);
-	// TODO: create delete logic
+	if (confirm('Are you sure you want to delete this recipe?') == true) {
+        delRecipe(id);
+    }
+
 }
 
 const detailsForUserTemplate = (recipe) =>

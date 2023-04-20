@@ -82,4 +82,14 @@ export function postRecipe(items, user) {
             alert('Cannot create a recipe')
         })
 }
-//TODO: create request for deleting recipe
+export function delRecipe(id) {
+    fetch(recipeDetailsURL + id, {
+        method: 'DELETE'
+    })
+        .then(res => res.json())
+        .then(() => {
+            alert('Successfully deleted!');
+            page.redirect('/recipes');
+        })
+        .catch(err => console.log(err))
+}
