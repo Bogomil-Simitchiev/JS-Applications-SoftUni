@@ -11,7 +11,7 @@ const create = document.getElementById('create');
 const contact = document.getElementById('contact');
 
 const recipeTemplate = (recipe) =>
-    html`
+html`
 <div class="card" style="width: 18rem;">
   <img src="${recipe.img}" class="card-img-top" alt="..." height=200px>
   <div class="card-body">
@@ -21,8 +21,8 @@ const recipeTemplate = (recipe) =>
 </div>
 `
 
-const recipesTemplate = (recipes) =>
-    html`
+export const recipesTemplate = (recipes) =>
+html`
     <h2>Recipes</h2>
     <br>
     <div class="recipes-list">
@@ -31,9 +31,9 @@ const recipesTemplate = (recipes) =>
 `
 
 export function recipesView(ctx) {
-  activeAtags(recipes,[home,about,contact,login,register,create])
-    getAllRecipes()
+  activeAtags(recipes, [home, about, contact, login, register, create]);
+  getAllRecipes()
     .then(recipes => {
-        ctx.render(recipesTemplate(recipes));
+      ctx.render(recipesTemplate(recipes));
     })
 }
