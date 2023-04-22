@@ -39,7 +39,7 @@ html`
   <label for="img">URL image:</label><br>
   <input type="text" id="img" name="img"><br>
 
-  <input type="submit" value="Submit">
+  <input type="submit" value="Create">
 </form> 
 `
 const root = document.getElementById('root');

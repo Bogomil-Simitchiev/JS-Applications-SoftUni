@@ -39,7 +39,7 @@ const editTemplate = (car) => html`
   <label for="img">URL image:</label><br>
   <input type="text" id="img" name="img" value=${car.img}><br>
 
-  <input type="submit" value="Submit">
+  <input type="submit" value="Edit">
 </form> 
 <br>
 <a href="/cars/${car._id}" class="previous">&laquo; Back</a>

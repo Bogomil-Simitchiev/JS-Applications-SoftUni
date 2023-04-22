@@ -32,7 +32,7 @@ const registerTemplate = () => html`
   <label for="confirmPassword">Confirm password:</label><br>
   <input type="password" id="confirmPassword" name="confirmPassword"><br>
 
-  <input type="submit" value="Submit">
+  <input type="submit" value="Register">
 </form>
 `
 const root = document.getElementById('root');
