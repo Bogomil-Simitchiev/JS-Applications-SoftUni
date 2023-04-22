@@ -2,7 +2,7 @@ import { html } from '../../node_modules/lit-html/lit-html.js'
 import { delRecipe, getRecipe } from '../requests/requests.js';
 
 const detailsForNotUserTemplate = (recipe) =>
-	html`
+html`
     <h3 align="center">
      <a class="previous" href="/recipes"><-- previous</a>  Details for ${recipe.name}</h3>    
     <div id="container">
@@ -33,7 +33,7 @@ function deleteRecipe(e) {
 }
 
 const detailsForUserTemplate = (recipe) =>
-	html`
+html`
     <h3 align="center" id="${recipe._id}">
      <a class="previous" href="/recipes"><-- previous</a><button class="deleteTag" @click=${deleteRecipe}>Delete</button>  Details for ${recipe.name}</h3>    
     <div id="container">

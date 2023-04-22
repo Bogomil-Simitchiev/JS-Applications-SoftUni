@@ -32,7 +32,7 @@ function createHandler(e) {
 }
 
 const createTemplate = () =>
-  html`
+html`
    <form class="modal-content animate" @submit=${createHandler}>
      <h2 align="center">Create a recipe</h2>
     <div class="container">

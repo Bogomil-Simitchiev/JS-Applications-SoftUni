@@ -10,7 +10,7 @@ const create = document.getElementById('create');
 const contact = document.getElementById('contact');
 
 const homeTemplate = () =>
-    html`
+html`
     <header>
     <h2>Welcome to our website - best recipes!</h2>
 	</header>
