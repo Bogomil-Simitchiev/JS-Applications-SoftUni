@@ -3,7 +3,7 @@ import { getAlbum } from '../services/requests.js';
 import { getUser } from '../utils/utils.js';
 
 const detailsTemplate = (album) =>
-    html`
+html`
 <section id="detailsPage">
             <div class="wrapper">
                 <div class="albumCover">
@@ -21,8 +21,8 @@ const detailsTemplate = (album) =>
                     </div>
 
                     ${getUser()._id == album._ownerId ? html`<div class="actionBtn">
-                        <a href="#" class="edit">Edit</a>
-                        <a href="#" class="remove">Delete</a>
+                        <a href="/edit/${album._id}" class="edit">Edit</a>
+                        <a href="/delete/${album._id}" class="remove">Delete</a>
                     </div>` : nothing}
                     
                 </div>

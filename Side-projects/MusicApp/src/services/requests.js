@@ -76,6 +76,36 @@ export function createAlbum(newAlbum) {
         .catch(err => alert(err));
 }
 
+//edit album
+export function editAlbum(editedAlbum, id) {
+    fetch(albumsURL + `/${id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': getToken()
+        },
+        body: JSON.stringify(editedAlbum)
+
+    })
+        .then(res => res.json())
+        .then(data => {
+            page.redirect(`/details/${data._id}`)
+        })
+        .catch(err => alert(err));
+}
+export function deleteAlbum(id) {
+    fetch(albumsURL + `/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'X-Authorization': getToken()
+        }
+    })
+        .then(() => {
+            page.redirect('/catalog');
+        })
+        .catch(err => alert(err));
+}
+
 
 //get all albums
 export const getAllAlbums = () =>
@@ -83,8 +113,9 @@ export const getAllAlbums = () =>
         .then(res => res.json())
         .catch(err => alert(err));
 
+
+//get single album
 export const getAlbum = (id) =>
-        fetch(albumsURL + `/${id}`)
-            .then(res => res.json())
-            .catch(err => alert(err));
-    
+    fetch(albumsURL + `/${id}`)
+        .then(res => res.json())
+        .catch(err => alert(err));
