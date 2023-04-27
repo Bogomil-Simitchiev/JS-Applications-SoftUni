@@ -4,7 +4,7 @@ import { getToken } from '../utils/utils.js';
 const loginURL = `http://localhost:3030/users/login/`;
 const registerURL = `http://localhost:3030/users/register/`;
 const logoutURL = `http://localhost:3030/users/logout/`;
-const albumsURL = `http://localhost:3030/data/albums?sortBy=_createdOn%20desc&distinct=name`;
+const albumsURL = `http://localhost:3030/data/albums`;
 
 //login request
 export function loginUser(user) {
@@ -59,9 +59,32 @@ export function registerUser(user) {
 
 }
 
-//get all albums
+//create album
+export function createAlbum(newAlbum) {
+    fetch(albumsURL, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': getToken()
+        },
+        body: JSON.stringify(newAlbum)
 
+    })
+        .then(() => {
+            page.redirect('/catalog');
+        })
+        .catch(err => alert(err));
+}
+
+
+//get all albums
 export const getAllAlbums = () =>
-    fetch(albumsURL)
+    fetch(albumsURL + `?sortBy=_createdOn%20desc&distinct=name`)
         .then(res => res.json())
         .catch(err => alert(err));
+
+export const getAlbum = (id) =>
+        fetch(albumsURL + `/${id}`)
+            .then(res => res.json())
+            .catch(err => alert(err));
+    
