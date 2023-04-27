@@ -1,4 +1,5 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
+import { getUser } from '../utils/utils.js';
 
 const guests =
 html` 
@@ -10,13 +11,6 @@ html`
 <li><a href="/create">Create Album</a></li>
 <li><a href="/logout">Logout</a></li>
 `
-const getUser = () => {
-    const currentUser = localStorage.getItem('user');
-    if (currentUser) {
-        let user = JSON.parse(currentUser);
-        return user;
-    }
-}
 
 const navigationTemplate = (user) =>
 html`
