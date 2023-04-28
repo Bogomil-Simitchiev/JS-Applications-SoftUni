@@ -106,6 +106,12 @@ export function deleteAlbum(id) {
         .catch(err => alert(err));
 }
 
+//search albums
+export const searchAlbums = (search) => {
+    const query = encodeURIComponent(`name LIKE "${search}"`);
+    return fetch(albumsURL + `?where=${query}`)
+
+}
 
 //get all albums
 export const getAllAlbums = () =>

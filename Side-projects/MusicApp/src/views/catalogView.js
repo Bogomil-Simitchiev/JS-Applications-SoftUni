@@ -20,7 +20,7 @@ html`
 
 `
 const catalogTemplate = (albums) =>
-    html`
+html`
 <section id="catalogPage">
             <h1>All Albums</h1>
 

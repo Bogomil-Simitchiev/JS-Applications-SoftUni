@@ -4,7 +4,7 @@ import { loginUser } from '../services/requests.js';
 function loginHandler(e) {
     e.preventDefault();
 
-    let formData = new FormData(e.currentTarget);
+    const formData = new FormData(e.currentTarget);
     const email = formData.get('email');
     const password = formData.get('password');
 

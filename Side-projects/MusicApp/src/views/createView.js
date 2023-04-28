@@ -26,7 +26,7 @@ function createHandler(e) {
 }
 
 const createTemplate = () =>
-    html`
+html`
 <section class="createPage">
             <form @submit=${createHandler}>
                 <fieldset>

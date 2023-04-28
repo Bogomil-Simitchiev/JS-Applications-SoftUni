@@ -4,7 +4,7 @@ import { registerUser } from '../services/requests.js';
 function registerHandler(e) {
     e.preventDefault();
 
-    let formData = new FormData(e.currentTarget);
+    const formData = new FormData(e.currentTarget);
     const email = formData.get('email');
     const password = formData.get('password');
     const confPass = formData.get('conf-pass');
