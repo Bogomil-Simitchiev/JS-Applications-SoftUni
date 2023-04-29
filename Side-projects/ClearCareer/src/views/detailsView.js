@@ -1,9 +1,9 @@
 import { html, nothing } from '../../node_modules/lit-html/lit-html.js';
-import { getOffer } from '../services/requests.js';
+import { getOffer, getOfferApplies, getOfferAppliesForTheUser } from '../services/requests.js';
 import { getUser } from '../util.js';
 
 const detailsTemplate = (offer, user) =>
-html`
+  html`
     <!-- Details page -->
     <section id="details">
       <div id="details-wrapper">
@@ -29,7 +29,7 @@ html`
         </div>
       
         <p>Applications: <strong id="applications">0</strong></p>
-        ${  getUser() ? getUser()._id == offer._ownerId ? html` 
+        ${user ? user._id == offer._ownerId ? html` 
         <div id="action-buttons">
           <a href="/edit/${offer._id}" id="edit-btn">Edit</a>
           <a href="/delete/${offer._id}" id="delete-btn">Delete</a>
@@ -39,16 +39,39 @@ html`
        
         <div id="action-buttons">
             <!--Bonus - Only for logged-in users ( not authors )-->
-           <a href="" id="apply-btn">Apply</a>
+           <a href="/apply/${offer._id}" id="apply-btn">Apply</a>
         </div>
 
-        `  : nothing }        
+        `  : nothing}        
       </div>
     </section>
 `
 
 export const detailsView = (ctx) => {
-    getOffer(ctx.params.id).then(offer => {
-        ctx.render(detailsTemplate(offer, getUser()));
+
+  getOffer(ctx.params.id).then(offer => {
+    ctx.render(detailsTemplate(offer, getUser()));
+  })
+
+  if (getUser()) {
+    getOfferAppliesForTheUser(ctx.params.id, getUser()._id).then(data => {
+      if (data == 1) {
+        document.getElementById('apply-btn').style.display = 'none';
+      } else {
+        document.getElementById('apply-btn').style.display = 'inline-block';
+      }
+      getOfferApplies(ctx.params.id).then(commonData => {
+        const countElement = document.getElementById('applications');
+        countElement.textContent = commonData;
+      })
+
     })
+
+  } else {
+    getOfferApplies(ctx.params.id).then(data => {
+      const countElement = document.getElementById('applications');
+      countElement.textContent = data;
+    })
+  }
+
 }

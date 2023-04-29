@@ -5,6 +5,8 @@ const baseURL = `http://localhost:3030/data/offers`;
 const loginURL = `http://localhost:3030/users/login/`;
 const registerURL = `http://localhost:3030/users/register/`;
 const logoutURL = `http://localhost:3030/users/logout/`;
+const applyURL = `http://localhost:3030/data/applications`;
+
 
 export const getAllOffers = () => fetch(baseURL + `?sortBy=_createdOn%20desc`).then(res => res.json()).catch(err => alert(err));
 
@@ -93,11 +95,11 @@ export function editOffer(editedOffer, id) {
         body: JSON.stringify(editedOffer)
 
     })
-    .then(res => res.json())
-    .then(offer => {
-        page.redirect(`/details/${offer._id}`)
-    })
-    .catch(err => alert(err));
+        .then(res => res.json())
+        .then(offer => {
+            page.redirect(`/details/${offer._id}`)
+        })
+        .catch(err => alert(err));
 }
 
 //delete offer
@@ -113,3 +115,31 @@ export function deleteOffer(id) {
         })
         .catch(err => alert(err));
 }
+
+//apply for offer
+export function applyForOffer(offerId) {
+    fetch(applyURL, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': getToken()
+        },
+        body: JSON.stringify(offerId)
+    })
+        .then(res => res.json())
+        .then(() => {
+            const countElement = document.getElementById('applications');
+            let num = Number(countElement.textContent) + 1;
+            countElement.textContent = num.toString();
+            document.getElementById('apply-btn').style.display = 'none';
+        })
+        .catch(err => {
+            alert(err);
+        })
+}
+
+//get applies for offer 
+export const getOfferApplies = (offerId) => fetch(applyURL + `?where=offerId%3D%22${offerId}%22&distinct=_ownerId&count`).then(res => res.json()).catch(err => alert(err));
+
+//get applies for offer from the current user
+export const getOfferAppliesForTheUser = (offerId, userId) => fetch(applyURL + `?where=offerId%3D%22${offerId}%22%20and%20_ownerId%3D%22${userId}%22&count`).then(res => res.json()).catch(err => alert(err));
