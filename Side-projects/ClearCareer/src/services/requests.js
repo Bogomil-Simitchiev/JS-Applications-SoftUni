@@ -78,3 +78,38 @@ export function createOffer(newOffer) {
         })
         .catch(err => alert(err));
 }
+
+//get single offer
+export const getOffer = (id) => fetch(baseURL + `/${id}`).then(res => res.json()).catch(err => alert(err));
+
+//edit offer
+export function editOffer(editedOffer, id) {
+    fetch(baseURL + `/${id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': getToken()
+        },
+        body: JSON.stringify(editedOffer)
+
+    })
+    .then(res => res.json())
+    .then(offer => {
+        page.redirect(`/details/${offer._id}`)
+    })
+    .catch(err => alert(err));
+}
+
+//delete offer
+export function deleteOffer(id) {
+    fetch(baseURL + `/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'X-Authorization': getToken()
+        }
+    })
+        .then(() => {
+            page.redirect('/dashboard');
+        })
+        .catch(err => alert(err));
+}
