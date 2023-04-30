@@ -76,3 +76,6 @@ span {
   color: white;
   background: #5c9596;
 }
+#apply-btn{
+  cursor: pointer;
+}

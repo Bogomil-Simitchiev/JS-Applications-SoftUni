@@ -1,12 +1,18 @@
 import { html, nothing } from '../../node_modules/lit-html/lit-html.js';
-import { getOffer, getOfferApplies, getOfferAppliesForTheUser } from '../services/requests.js';
+import { applyForOffer, getOffer, getOfferApplies, getOfferAppliesForTheUser } from '../services/requests.js';
 import { getUser } from '../util.js';
+
+function applyHandler(e) {
+  e.preventDefault();
+  const offerId = document.querySelector('#details-wrapper').className;
+  applyForOffer({ offerId });
+}
 
 const detailsTemplate = (offer, user) =>
   html`
     <!-- Details page -->
     <section id="details">
-      <div id="details-wrapper">
+      <div id="details-wrapper" class="${offer._id}">
         <img id="details-img" src="${offer.imageUrl}" alt="example1" />
         <p id="details-title">${offer.title}</p>
         <p id="details-category">
@@ -39,7 +45,7 @@ const detailsTemplate = (offer, user) =>
        
         <div id="action-buttons">
             <!--Bonus - Only for logged-in users ( not authors )-->
-           <a href="/apply/${offer._id}" id="apply-btn">Apply</a>
+           <a @click=${applyHandler} id="apply-btn">Apply</a>
         </div>
 
         `  : nothing}        
@@ -56,9 +62,13 @@ export const detailsView = (ctx) => {
   if (getUser()) {
     getOfferAppliesForTheUser(ctx.params.id, getUser()._id).then(data => {
       if (data == 1) {
-        document.getElementById('apply-btn').style.display = 'none';
+        if (document.getElementById('apply-btn')) {
+          document.getElementById('apply-btn').style.display = 'none';
+        }
       } else {
-        document.getElementById('apply-btn').style.display = 'inline-block';
+        if (document.getElementById('apply-btn')) {
+          document.getElementById('apply-btn').style.display = 'inline-block';
+        }
       }
       getOfferApplies(ctx.params.id).then(commonData => {
         const countElement = document.getElementById('applications');
