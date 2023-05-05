@@ -6,6 +6,7 @@ import { renderMiddleware } from './middlewares/renderMiddleware.js';
 import { logout } from './service/requests.js';
 import { createView } from './views/createView.js';
 import { dashboardView } from './views/dashboardView.js';
+import { deleteView } from './views/deleteView.js';
 import { detailsView } from './views/detailsView.js';
 import { editView } from './views/editView.js';
 import { homeView } from './views/homeView.js';
@@ -23,6 +24,6 @@ page('/dashboard', dashboardView);
 page('/create', createView);
 page('/details/:id', detailsView);
 page('/edit/:id', editView);
-
+page('/delete/:id',deleteView)
 
 page.start();
