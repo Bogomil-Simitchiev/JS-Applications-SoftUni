@@ -8,10 +8,9 @@ async function loginHandler(e) {
     const { email, password } = Object.fromEntries(new FormData(e.currentTarget));
 
     if (email !== '' && password !== '') {
-        const user = await login({ email, password });
-        if (user) {
-            setUser(user);
-        }
+        const user = await login({ email, password });       
+        setUser(user);
+        
     }
 }
 
