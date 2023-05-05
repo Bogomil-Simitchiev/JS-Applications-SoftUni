@@ -1,4 +1,3 @@
-import page from '../../node_modules/page/page.mjs';
 import { deletePet } from '../service/requests.js'
 
 export const deleteView = (ctx) => {
