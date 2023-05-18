@@ -1,7 +1,10 @@
 import { navigate } from '../views/utils.js';
 import page from '../node_modules/page/page.mjs'
+import { token } from '../views/utils.js';
 
-const urlCars = `http://localhost:3030/jsonstore/cars/`
+const urlCars = `http://localhost:3030/jsonstore/cars/`;
+const urlLikes = `http://localhost:3030/data/likes/`
+
 
 export function getInfoAboutCars() {
     return fetch(urlCars).then(res => res.json()).catch(err => console.log(err));
@@ -61,7 +64,8 @@ export function createCar(car) {
     fetch(urlCars, {
         method: 'POST',
         headers: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'X-Authorization': token()
         },
         body: JSON.stringify(car)
     })
@@ -78,7 +82,10 @@ export function createCar(car) {
 
 export function delCar(id) {
     fetch(urlCars + id, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers:{
+            'X-Authorization': token()
+        }
     })
         .then(res => res.json())
         .then(() => {
@@ -91,7 +98,8 @@ export function editCar(id, car) {
     fetch(urlCars + id, {
         method: 'PUT',
         headers: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'X-Authorization': token
         },
         body: JSON.stringify(car)
     })
@@ -105,3 +113,24 @@ export function editCar(id, car) {
             console.log('Cannot edit car article!')
         })
 }
+
+export const like = (carId) => fetch(urlLikes, {
+    method: 'POST',
+    headers: {
+        'content-type': 'application/json',
+        'X-Authorization': token()
+    },
+    body: JSON.stringify(carId)
+
+}).then(res => res.json()).then( like => {
+    page.redirect(`/cars/${like.carId}`);
+}).catch(err => console.log(err));
+
+export const getCarLikes = (carId) => {
+    let query = encodeURIComponent(`carId="${carId}"`);
+    let queryString = `where=${query}`;
+
+    return fetch(`${urlLikes}?${queryString}`).then(res => res.json()).catch(err => console.log(err));
+}
+
+//TODO: Create unlike logic request

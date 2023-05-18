@@ -1,7 +1,7 @@
 import page from '../node_modules/page/page.mjs'
 
 import { html, render } from '../node_modules/lit-html/lit-html.js'
-import { delCar, getInfoAboutSingleCar } from '../requests/requests.js';
+import { delCar, getCarLikes, getInfoAboutSingleCar, like } from '../requests/requests.js';
 
 function deleteCar(e) {
     e.preventDefault();
@@ -15,8 +15,7 @@ function editCar(e) {
     e.preventDefault();
     page.redirect('/edit');
 }
-
-const templateWithoutPer = (car) => html`
+const templateWithoutPerWithLikeButton = (car, likes, onLike, onUnlike, isLiked) => html`
      <article id="${Number(car._id)}">
      <h1>${car.brand}</h1>
      <p>${car.info}</p>
@@ -24,10 +23,28 @@ const templateWithoutPer = (car) => html`
      <br>
      <br>
      <a href="/catalog" class="previous">&laquo; Back</a>
+     <br>
+     <br>
+     <br>
+     ${isLiked ? html`<button class="likeBtn" @click=${() => onUnlike()}>Unlike</button>` : html`<button class="likeBtn" @click=${() => onLike(car)} >Like</button>`}
+     
+     <p>Likes: ${likes}</p>
      </article>
 `
 
-const carTemplate = (car) => {
+const templateWithoutPer = (car, likes) => html`
+     <article id="${Number(car._id)}">
+     <h1>${car.brand}</h1>
+     <p>${car.info}</p>
+     <img src="${car.img}"/>
+     <br>
+     <br>
+     <a href="/catalog" class="previous">&laquo; Back</a>
+     <p>Likes: ${likes}</p>
+     </article>
+`
+
+const carTemplate = (car, likes, onLike, onUnlike, isLiked) => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
         if (car.userId) {
@@ -45,22 +62,43 @@ const carTemplate = (car) => {
                 </article>
                 <br>
                 <a href="/catalog" class="previous">&laquo; Back</a>
+                <p>Likes: ${likes}</p>
                 
                 `
             } else {
-                return templateWithoutPer(car);
+                return templateWithoutPerWithLikeButton(car, likes, onLike,onUnlike, isLiked);
             }
         } else {
-            return templateWithoutPer(car);
+            return templateWithoutPerWithLikeButton(car, likes, onLike,onUnlike, isLiked);
         }
     } else {
-        return templateWithoutPer(car);
+        return templateWithoutPer(car, likes);
     }
 }
 
-export const carView = (ctx) => {
+export const carView = async (ctx) => {
+
+    const onLike = (car) => {
+        like({ carId: car._id });
+    }
+    const onUnlike = () => {
+        console.log('Unlike!');
+    }
+
+
     let infoAboutCar = getInfoAboutSingleCar(ctx.params.id);
     infoAboutCar.then(result => {
-        render(carTemplate(result), document.querySelector('#root'));
+        let likesOfCar = getCarLikes(result._id);
+        likesOfCar.then(likes => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                let isLiked = likes.some(x => x._ownerId == user._id);
+                render(carTemplate(result, likes.length, onLike,onUnlike, isLiked), document.querySelector('#root'));
+            } else {
+
+                render(carTemplate(result, likes.length, onLike, onUnlike), document.querySelector('#root'));
+            }
+
+        })
     });
 }

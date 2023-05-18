@@ -11,3 +11,9 @@ export function navigate() {
         document.querySelectorAll('.guest').forEach(e => e.style.display = 'block');
     }
 }
+export const token = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+        return user.accessToken;
+    }
+}
