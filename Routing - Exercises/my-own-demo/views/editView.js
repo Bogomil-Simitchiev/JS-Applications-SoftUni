@@ -1,5 +1,5 @@
-import { html, render } from '../node_modules/lit-html/lit-html.js'
-import { editCar, getInfoAboutCars, getInfoAboutSingleCar } from '../requests/requests.js';
+import { html } from '../node_modules/lit-html/lit-html.js'
+import { editCar, getInfoAboutCars, getInfoAboutSingleCar } from '../service/requests.js';
 
 function handlerEdit(e) {
     e.preventDefault();
@@ -24,7 +24,8 @@ function handlerEdit(e) {
     }
 }
 
-const editTemplate = (car) => html`
+const editTemplate = (car) => 
+html`
 <h1>Edit car info</h1>
 <form @submit=${handlerEdit}>
   <label for="brand">Brand:</label><br>
@@ -44,15 +45,14 @@ const editTemplate = (car) => html`
 <br>
 <a href="/cars/${car._id}" class="previous">&laquo; Back</a>
 `
-const root = document.getElementById('root');
 
-export function editView() {
+export function editView(ctx) {
     const user = JSON.parse(localStorage.getItem('user'));
     let car = getInfoAboutCars();
     car.then(result => {
         Object.values(result).forEach(infoCar => {
             if (user._id == infoCar.userId) {
-                render(editTemplate(infoCar), root);
+                ctx.render(editTemplate(infoCar));
             }
         })
     })

@@ -1,5 +1,5 @@
-import { html, render } from '../node_modules/lit-html/lit-html.js'
-import { getInfoAboutCars } from '../requests/requests.js';
+import { html } from '../node_modules/lit-html/lit-html.js'
+import { getInfoAboutCars } from '../service/requests.js';
 
 const catalogTemplate = (informations) => html`
 ${informations.map(info =>
@@ -11,11 +11,10 @@ ${informations.map(info =>
         <a href="/cars/${Number(info._id) || info._id}">read more...</a>
         </main>
         `)}`
-const root = document.getElementById('root');
 
-export function catalogView() {
+export function catalogView(ctx) {
     let info = getInfoAboutCars();
     info.then(informations => {
-        render(catalogTemplate(Object.values(informations)), root);
+        ctx.render(catalogTemplate(Object.values(informations)));
     })
 }

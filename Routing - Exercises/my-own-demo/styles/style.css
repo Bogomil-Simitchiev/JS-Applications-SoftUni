@@ -127,6 +127,21 @@ textarea{
   font-size: 15px;
   color: white;
 }
+.buttonEdit:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.buttonDelete:active {
+  background-color: #fa1f0f;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.buttonLike:active {
+  background-color: #0f71fa;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 img{
   width: 450px;
   height: 300px;

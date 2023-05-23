@@ -1,5 +1,5 @@
-import { html, render } from '../node_modules/lit-html/lit-html.js'
-import { createCar } from '../requests/requests.js';
+import { html } from '../node_modules/lit-html/lit-html.js'
+import { createCar } from '../service/requests.js';
 
 function handlerSubmit(e) {
     e.preventDefault();
@@ -24,6 +24,7 @@ function handlerSubmit(e) {
     }
 
 }
+
 const createTemplate = () => 
 html`
 <form @submit=${handlerSubmit}>
@@ -42,8 +43,7 @@ html`
   <input type="submit" value="Create">
 </form> 
 `
-const root = document.getElementById('root');
 
-export function createView() {
-    render(createTemplate(), root);
+export function createView(ctx) {
+    ctx.render(createTemplate());
 }

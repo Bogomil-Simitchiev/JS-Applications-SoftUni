@@ -1,6 +1,7 @@
-import { html, render } from '../node_modules/lit-html/lit-html.js'
+import { html } from '../node_modules/lit-html/lit-html.js'
 
-const welcomeTemplate = () => html`
+const welcomeTemplate = () => 
+html`
 <header>
 		<h1>Welcome to our website - Best cars</h1>
 	</header>
@@ -13,8 +14,7 @@ const welcomeTemplate = () => html`
 	</footer>
 	
 `
-const root = document.getElementById('root');
 
-export function welcomeView() {
-	render(welcomeTemplate(), root);
+export function welcomeView(ctx) {
+	ctx.render(welcomeTemplate());
 }

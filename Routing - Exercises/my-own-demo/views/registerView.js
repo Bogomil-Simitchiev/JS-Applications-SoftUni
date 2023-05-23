@@ -1,5 +1,6 @@
-import { html, render } from '../node_modules/lit-html/lit-html.js'
-import { postRegistration } from '../requests/requests.js';
+import { html } from '../node_modules/lit-html/lit-html.js'
+import { registerUser } from '../service/requests.js';
+
 function registerHandler(e) {
   e.preventDefault();
   const formData = new FormData(e.currentTarget);
@@ -13,7 +14,7 @@ function registerHandler(e) {
         email,
         password
       }
-      postRegistration(user);
+      registerUser(user);
     } else {
       alert('Passwords are not matching');
       document.getElementById('confirmPassword').value = '';
@@ -21,7 +22,8 @@ function registerHandler(e) {
   }
 }
 
-const registerTemplate = () => html`
+const registerTemplate = () => 
+html`
 <h1>Registration</h1>
 <form @submit=${registerHandler}>
   <label for="email">Email:</label><br>
@@ -35,8 +37,7 @@ const registerTemplate = () => html`
   <input type="submit" value="Register">
 </form>
 `
-const root = document.getElementById('root');
 
-export function registerView() {
-  render(registerTemplate(), root);
+export function registerView(ctx) {
+  ctx.render(registerTemplate());
 }

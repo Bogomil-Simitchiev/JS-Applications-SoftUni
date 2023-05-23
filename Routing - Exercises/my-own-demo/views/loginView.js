@@ -1,5 +1,5 @@
-import { html, render } from '../node_modules/lit-html/lit-html.js'
-import { postLogIn } from '../requests/requests.js';
+import { html } from '../node_modules/lit-html/lit-html.js'
+import { loginUser } from '../service/requests.js';
 
 function loginHandler(e) {
     e.preventDefault();
@@ -12,11 +12,12 @@ function loginHandler(e) {
             email,
             password
         }
-        postLogIn(user);
+        loginUser(user);
     }
 }
 
-const loginTemplate = () => html`
+const loginTemplate = () => 
+html`
 <h1>Log in</h1>
 <form @submit=${loginHandler}>
   <label for="email">Email:</label><br>
@@ -28,8 +29,7 @@ const loginTemplate = () => html`
   <input type="submit" value="Login">
 </form>
 `
-const root = document.getElementById('root');
 
-export function loginView() {
-    render(loginTemplate(), root);
+export function loginView(ctx) {
+    ctx.render(loginTemplate());
 }

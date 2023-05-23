@@ -1,18 +1,18 @@
-import { navigate } from '../views/utils.js';
 import page from '../node_modules/page/page.mjs'
-import { token } from '../views/utils.js';
+import { navigate, token } from '../utils/utils.js';
 
 const urlCars = `http://localhost:3030/jsonstore/cars/`;
 const urlLikes = `http://localhost:3030/data/likes/`
 
-
 export function getInfoAboutCars() {
     return fetch(urlCars).then(res => res.json()).catch(err => console.log(err));
 }
+
 export function getInfoAboutSingleCar(id) {
     return fetch(urlCars + id).then(res => res.json()).catch(err => console.log(err));
 }
-export function postRegistration(user) {
+
+export function registerUser(user) {
     fetch('http://localhost:3030/users/register/', {
         method: 'POST',
         headers: {
@@ -31,7 +31,8 @@ export function postRegistration(user) {
             alert('Cannot register this user!');
         })
 }
-export function postLogIn(user) {
+
+export function loginUser(user) {
     fetch('http://localhost:3030/users/login/', {
         method: 'POST',
         headers: {
@@ -58,6 +59,10 @@ export function postLogIn(user) {
             alert('Cannot log in this user!')
         })
 
+}
+
+export const logoutUser = () => {
+    fetch('http://localhost:3030/users/logout/', { headers: { 'X-Authorization': token() } });
 }
 
 export function createCar(car) {
@@ -94,12 +99,13 @@ export function delCar(id) {
         })
         .catch(err => console.log(err))
 }
+
 export function editCar(id, car) {
     fetch(urlCars + id, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
-            'X-Authorization': token
+            'X-Authorization': token()
         },
         body: JSON.stringify(car)
     })
@@ -133,4 +139,16 @@ export const getCarLikes = (carId) => {
     return fetch(`${urlLikes}?${queryString}`).then(res => res.json()).catch(err => console.log(err));
 }
 
-//TODO: Create unlike logic request
+export const deleteLike = (likeId, id) => {
+    fetch(urlLikes + likeId, {
+        method: 'DELETE',
+        headers:{
+            'X-Authorization': token()
+        }
+    })
+        .then(res => res.json())
+        .then(() => {
+           page.redirect(`/cars/${id}`);
+        })
+        .catch(err => console.log(err))
+}
