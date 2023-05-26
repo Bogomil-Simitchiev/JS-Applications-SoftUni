@@ -1,5 +1,5 @@
-import page from '../node_modules/page/page.mjs'
-import { html } from '../node_modules/lit-html/lit-html.js'
+import page from '../lib/page.js'
+import { html } from '../lib/lit-html.js'
 import { delCar, deleteLike, getCarLikes, getInfoAboutSingleCar, like } from '../service/requests.js';
 
 function deleteCar(e) {
@@ -10,9 +10,8 @@ function deleteCar(e) {
     }
 }
 
-function editCar(e) {
-    e.preventDefault();
-    page.redirect('/edit');
+function editCar(id) {
+    page.redirect(`/edit/${id}`);
 }
 
 const templateWithLikeButton = (car, likes, onLike, onUnlike, isLiked, currentUserLike) => 
@@ -57,7 +56,7 @@ const carTemplate = (car, likes, onLike, onUnlike, isLiked, currentUserLike) => 
                 <br>
                 <br>
                 <button class="deleteBtn buttonDelete" @click=${deleteCar} >Delete</button>
-                <button class="editBtn buttonEdit" @click=${editCar} >Edit</button>
+                <button class="editBtn buttonEdit" @click=${()=> editCar(car._id)} >Edit</button>
                 <br>
                 </article>
                 <br>

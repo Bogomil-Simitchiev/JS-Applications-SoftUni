@@ -1,4 +1,4 @@
-import page from './node_modules/page/page.mjs'
+import page from './lib/page.js'
 
 import { renderMiddleware } from './middleware/renderMiddleware.js';
 import { catalogView } from './views/catalogView.js'
@@ -22,7 +22,7 @@ page('/contact', contactView);
 page('/register', registerView);
 page('/login', loginView);
 page('/create', createView);
-page('/edit', editView);
+page('/edit/:id', editView);
 page('/cars/:id', carView);
 page('/catalog', catalogView);
 page('/logout', logout);

@@ -1,4 +1,4 @@
-import page from '../node_modules/page/page.mjs'
+import page from '../lib/page.js'
 import { navigate, token } from '../utils/utils.js';
 
 const urlCars = `http://localhost:3030/jsonstore/cars/`;

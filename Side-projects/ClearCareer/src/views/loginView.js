@@ -14,7 +14,7 @@ function loginHandler(e) {
 }
 
 const loginTemplate = () =>
-    html`
+html`
 <!-- Login Page (Only for Guest users) -->
 <section id="login">
           <div class="form">

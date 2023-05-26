@@ -1,4 +1,4 @@
-import { html } from '../node_modules/lit-html/lit-html.js'
+import { html } from '../lib/lit-html.js'
 import { createCar } from '../service/requests.js';
 
 function handlerSubmit(e) {

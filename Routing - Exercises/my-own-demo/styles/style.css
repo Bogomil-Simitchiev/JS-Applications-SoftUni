@@ -128,17 +128,17 @@ textarea{
   color: white;
 }
 .buttonEdit:active {
-  background-color: #3e8e41;
+  background-color: green;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
 .buttonDelete:active {
-  background-color: #fa1f0f;
+  background-color: red;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
 .buttonLike:active {
-  background-color: #0f71fa;
+  background-color: blue;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
